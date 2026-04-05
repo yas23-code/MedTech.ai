@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MedTech AI - Digital Prescription</title>
+    <!-- Modern Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+    <!-- PDF Generation Library -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+</head>
+
+<body>
+    <div class="container">
+        <header>
+            <div class="logo">
+                <span class="icon">⚕️</span>
+                <h1>MedTech AI</h1>
+            </div>
+            <p class="subtitle">Convert messy handwritten prescriptions into digital records instantly.</p>
+            <div class="header-actions">
+                <select id="language-selector" class="btn secondary-btn">
+                    <option value="en">English</option>
+                    <option value="hi">Hindi (हिन्दी)</option>
+                </select>
+                <button class="btn secondary-btn hidden" id="download-pdf-btn">Download PDF Report</button>
+            </div>
+        </header>
+
+        <main>
+            <!-- Page 1: Upload View -->
+            <section class="upload-section" id="scan-view">
+                <div class="card upload-card" id="drop-area">
+                    <div class="card-content">
+                        <div class="upload-icon">📁</div>
+                        <h3>Upload Prescription Image</h3>
+                        <p>Drag and drop or click to browse</p>
+                        <input type="file" id="file-input" accept="image/*" hidden>
+                        <button class="btn primary-btn" id="upload-btn">Select Image</button>
+                    </div>
+                </div>
+
+                <!-- Preview Section -->
+                <div class="image-preview-container hidden" id="preview-container">
+                    <img id="image-preview" src="#" alt="Preview">
+                    <button class="btn primary-btn" id="analyze-btn" style="margin-top: 20px;">Start Analysis</button>
+                </div>
+            </section>
+
+            <section class="results-section hidden" id="results-view">
+                <div class="results-header" style="text-align: center; margin-bottom: 2rem;">
+                    <h2>Analysis Results</h2>
+                    <button class="btn secondary-btn" id="back-btn" style="margin-top: 1rem;">🔄 Scan Another
+                        Prescription</button>
+                    <p style="margin-top: 10px; color: #64748b;">Here is the digital digitization of your prescription.
+                    </p>
+                </div>
+
+                <div class="grid-container">
+                    <div class="card result-card highlight-card">
+                        <h3>Detected Medicines</h3>
+                        <ul class="medicine-list" id="medicine-list">
+                            <!-- Medicines will be added here -->
+                        </ul>
+                        <div id="no-medicines" class="hidden">No medicines identified.</div>
+                        <button class="btn primary-btn" id="shop-btn" style="margin-top: 1rem; width: 100%;">🛒 Shop
+                            Medicines</button>
+                        <button class="btn secondary-btn hidden" id="maps-btn"
+                            style="margin-top: 1rem; width: 100%; border-color: #28a745; color: #28a745;">🔍 Find Nearby
+                            Pharmacy</button>
+                    </div>
+
+                    <!-- Dose/Timings Card -->
+                    <div class="card result-card timing-card">
+                        <h3>Dosage / Timings</h3>
+                        <ul class="timing-list" id="timing-list">
+                            <!-- Timings will be added here -->
+                        </ul>
+                        <div id="no-timings" class="hidden">No dosage patterns identified.</div>
+                        <button class="btn secondary-btn hidden" id="calendar-btn"
+                            style="margin-top: 1rem; width: 100%;">Add to Calendar</button>
+                    </div>
+                </div>
+            </section>
+        </main>
+
+        <!-- Loader overlay -->
+        <div id="loader" class="loader-overlay hidden">
+            <div class="loader"></div>
+            <p>Processing Prescription...</p>
+        </div>
+
+        <footer>
+            <p>&copy; 2024 MedTech AI - Smart Healthcare Solutions</p>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
