@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
     const API_URL = window.location.hostname === '127.0.0.1' || window.location.hostname === 'localhost'
         ? 'http://127.0.0.1:5000'
-        : 'YOUR_RENDER_BACKEND_URL'; // Update this after deploying backend
+        : 'https://medtech-ai-r6jx.onrender.com'; // Final connected live URL!
 
     // 4. API Request to Backend
     analyzeBtn.addEventListener('click', async () => {
