@@ -1,22 +1,20 @@
-import easyocr
-import numpy as np
+import pytesseract
+from PIL import Image
 
-# Initialize the reader once for efficiency (English only)
-reader = easyocr.Reader(['en'])
-
-def extract_text_from_image(preprocessed_image):
+def extract_text_from_image(image):
     """
-    Extract text using EasyOCR (much better for handwriting).
-    Note: EasyOCR works best with original images or lightly processed ones.
+    Extract text using PyTesseract (much lighter for limited RAM).
+    Expects a preprocessed PIL Image or a numpy array.
     """
     try:
-        # EasyOCR can take a numpy array directly (OpenCV image)
-        results = reader.readtext(preprocessed_image)
+        # Convert to PIL if image is a numpy array (common from OpenCV)
+        if not isinstance(image, Image.Image):
+            image = Image.fromarray(image)
         
-        # Combine all detected text blocks into a single string
-        extracted_text = " ".join([res[1] for res in results])
+        # Simple extraction of text from image
+        extracted_text = pytesseract.image_to_string(image)
         
         return extracted_text
     except Exception as e:
-        print(f"EasyOCR error: {e}")
+        print(f"Tesseract OCR error: {e}")
         return f"Error: {str(e)}"
